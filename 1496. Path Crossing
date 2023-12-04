@@ -1,0 +1,43 @@
+class Solution {
+
+    // Origin
+    int x = 0;
+    int y = 0;
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        boolean isCrossing = s.isPathCrossing("NNSWWEWSSESSWENNW");
+        System.out.println(isCrossing);
+    }
+
+    public boolean isPathCrossing(String path) {
+        char[] directions = path.toCharArray();
+        int length = path.length();
+
+        List<String> visitedPoints = new ArrayList<>();
+        visitedPoints.add(x + "," + y);
+
+        for(int i = 0; i < length; i++) {
+            char letter = directions[i];
+
+            if(letter == 'N') {
+                y++;
+            } else if(letter == 'S') {
+                y--;
+            } else if(letter == 'E') {
+                x++;
+            } else if(letter == 'W') {
+                x--;
+            }
+
+            String lastPoint = x + "," + y;
+
+            if(visitedPoints.contains(lastPoint)) {
+                return true;
+            } else {
+                visitedPoints.add(lastPoint);
+            }
+        }
+        return false;
+    }
+}
